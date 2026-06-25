@@ -1,4 +1,5 @@
 # .gitignore custom settings
+.env
 /Dockerfile
 /config/nodejs/conf.d/*
 !/config/nodejs/conf.d/.gitkeep
