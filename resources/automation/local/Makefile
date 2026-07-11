@@ -123,15 +123,19 @@ apirest-destroy: ## destroys completly the apirest container
 	fi
 
 # -------------------------------------------------------------------------------------------------
-#  MongoDB Service
+#  Mongo DB & Client
 # -------------------------------------------------------------------------------------------------
-.PHONY: mongo-ports-check mongo-info mongo-set mongo-create mongo-ssh mongo-start mongo-stop mongo-destroy
+.PHONY: mongo-host-check mongo-set
 
-mongo-ports-check: ## shows this project ports availability on local machine for database and client containers
+mongo-host-check: ## shows container service requirements status on local machine
 	cd platforms/$(MONGODB_PLTF) && $(MAKE) ports-check
 
 mongo-set: ## sets the database and client enviroment file to build both container
 	cd platforms/$(MONGODB_PLTF) && $(MAKE) env-set
+
+# --- #
+
+.PHONY: mongo-info mongo-build mongo-create mongo-ssh mongo-start mongo-stop mongo-destroy
 
 mongo-info: ## shows docker related information
 	cd platforms/$(MONGODB_PLTF) && $(MAKE) info
@@ -175,10 +179,9 @@ mongo-destroy: ## destroys completly the database container with its data
 		fi \
 	fi
 
-# -------------------------------------------------------------------------------------------------
-#  MongoDB Client Service
-# -------------------------------------------------------------------------------------------------
-.PHONY: mongo-client-info mongo-client-create mongo-client-ssh mongo-client-start mongo-client-stop mongo-client-destroy
+# --- #
+
+.PHONY: mongo-client-info mongo-client-build mongo-client-create mongo-client-ssh mongo-client-start mongo-client-stop mongo-client-destroy
 
 mongo-client-info: ## shows docker related information
 	cd platforms/$(MONGODB_PLTF) && $(MAKE) info-client
